@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveNow - Premium Car Rental Service</title>
+    <meta name="description"
+        content="Rent premium cars from multiple destinations. Choose from luxury sedans, SUVs, sports cars and more.">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">DriveNow</a>
+            <ul class="nav-links" id="authLinks">
+                <li><a href="/browse.html">Browse Cars</a></li>
+                <li><a href="/login.html">Login</a></li>
+                <li><a href="/register.html" class="btn btn-primary">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Drive Your Dreams</h1>
+            <p>Experience luxury and freedom with our premium car rental service. Choose from hundreds of vehicles
+                across multiple destinations.</p>
+            <div class="hero-buttons">
+                <a href="/browse.html" class="btn btn-primary">Browse Cars</a>
+                <a href="#featured" class="btn btn-outline">Learn More</a>
+            </div>
+
+            <!-- Quick Search Widget -->
+            <div class="search-widget">
+                <form class="search-form" id="quickSearchForm">
+                    <div class="form-group">
+                        <label for="searchLocation">Location</label>
+                        <select id="searchLocation" class="form-control">
+                            <option value="">Select Location</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="searchPickup">Pickup Date</label>
+                        <input type="date" id="searchPickup" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="searchReturn">Return Date</label>
+                        <input type="date" id="searchReturn" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label style="opacity: 0;">Search</label>
+                        <button type="submit" class="btn btn-secondary" style="width: 100%;">Search Cars</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Destinations -->
+    <section class="section" id="featured">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Popular Destinations</h2>
+                <p class="section-subtitle">Rent cars from our premium locations across the country</p>
+            </div>
+            <div class="grid grid-3" id="destinationsGrid">
+                <!-- Destinations will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Cars -->
+    <section class="section" style="background: var(--gray-100);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Vehicles</h2>
+                <p class="section-subtitle">Discover our handpicked selection of premium cars</p>
+            </div>
+            <div class="grid grid-3" id="featuredCarsGrid">
+                <!-- Featured cars will be loaded here -->
+            </div>
+            <div class="text-center mt-3">
+                <a href="/browse.html" class="btn btn-primary">View All Cars</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose DriveNow?</h2>
+                <p class="section-subtitle">Experience the best car rental service</p>
+            </div>
+            <div class="grid grid-3">
+                <div class="card">
+                    <div class="card-content" style="text-align: center; padding: 2rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🚗</div>
+                        <h3>Premium Fleet</h3>
+                        <p>Choose from luxury sedans, SUVs, sports cars and more from top brands</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content" style="text-align: center; padding: 2rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📍</div>
+                        <h3>Multiple Locations</h3>
+                        <p>Pick up and drop off at convenient locations across major cities</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content" style="text-align: center; padding: 2rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">💎</div>
+                        <h3>Best Prices</h3>
+                        <p>Competitive rates with no hidden fees. What you see is what you pay</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h4>About DriveNow</h4>
+                    <p>Your trusted premium car rental partner since 2020. We provide luxury vehicles across major
+                        cities in the US and India with 24/7 customer support.</p>
+                    <div style="margin-top: 1rem;">
+                        <p style="font-size: 0.9rem; color: var(--gray-400);">
+                            📞 1-800-DRIVE-NOW<br>
+                            📧 support@drivenow.com<br>
+                            🕐 24/7 Customer Support
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Services Section -->
+                <div class="footer-section">
+                    <h4>Our Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="/browse.html">Car Rental</a></li>
+                        <li><a href="/browse.html?type=luxury">Luxury Cars</a></li>
+                        <li><a href="/browse.html?type=suv">SUV Rentals</a></li>
+                        <li><a href="/browse.html?type=electric">Electric Vehicles</a></li>
+                        <li><a href="#">Long-term Leasing</a></li>
+                        <li><a href="#">Corporate Rentals</a></li>
+                    </ul>
+                </div>
+
+                <!-- Locations Section -->
+                <div class="footer-section">
+                    <h4>Our Locations</h4>
+                    <ul class="footer-links">
+                        <li><a href="/browse.html">🇺🇸 United States</a></li>
+                        <li style="padding-left: 1.5rem;"><a href="#">New York, Los Angeles, Miami</a></li>
+                        <li style="padding-left: 1.5rem;"><a href="#">Chicago, San Francisco, Boston</a></li>
+                        <li><a href="/browse.html">🇮🇳 India</a></li>
+                        <li style="padding-left: 1.5rem;"><a href="#">Mumbai, Delhi, Bangalore</a></li>
+                        <li style="padding-left: 1.5rem;"><a href="#">Hyderabad, Chennai, Pune</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support Section -->
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Booking Guide</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cancellation Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter Section -->
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p style="margin-bottom: 1rem;">Subscribe to get special offers and updates</p>
+                    <form style="margin-bottom: 1.5rem;">
+                        <input type="email" placeholder="Your email" class="form-control"
+                            style="margin-bottom: 0.5rem;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Subscribe</button>
+                    </form>
+                    <div>
+                        <p style="margin-bottom: 0.5rem; font-weight: 600;">Follow Us</p>
+                        <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+                            <a href="#" style="color: var(--gray-400); transition: color 0.3s;"
+                                onmouseover="this.style.color='var(--primary)'"
+                                onmouseout="this.style.color='var(--gray-400)'">📘</a>
+                            <a href="#" style="color: var(--gray-400); transition: color 0.3s;"
+                                onmouseover="this.style.color='var(--primary)'"
+                                onmouseout="this.style.color='var(--gray-400)'">🐦</a>
+                            <a href="#" style="color: var(--gray-400); transition: color 0.3s;"
+                                onmouseover="this.style.color='var(--primary)'"
+                                onmouseout="this.style.color='var(--gray-400)'">📷</a>
+                            <a href="#" style="color: var(--gray-400); transition: color 0.3s;"
+                                onmouseover="this.style.color='var(--primary)'"
+                                onmouseout="this.style.color='var(--gray-400)'">💼</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom"
+                style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p>&copy; 2024 DriveNow. All rights reserved.</p>
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <a href="#" style="color: var(--gray-400); text-decoration: none; font-size: 0.9rem;">Privacy
+                        Policy</a>
+                    <a href="#" style="color: var(--gray-400); text-decoration: none; font-size: 0.9rem;">Terms &
+                        Conditions</a>
+                    <a href="#" style="color: var(--gray-400); text-decoration: none; font-size: 0.9rem;">Cookie
+                        Policy</a>
+                    <a href="#" style="color: var(--gray-400); text-decoration: none; font-size: 0.9rem;">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        // Load locations for search widget
+        async function loadLocations() {
+            try {
+                const locations = await CarRental.apiRequest('/locations');
+                const select = document.getElementById('searchLocation');
+
+                locations.forEach(location => {
+                    const option = document.createElement('option');
+                    option.value = location.id;
+                    option.textContent = `${location.name}, ${location.city}`;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Failed to load locations:', error);
+            }
+        }
+
+        // Load destinations
+        async function loadDestinations() {
+            try {
+                const locations = await CarRental.apiRequest('/locations');
+                const grid = document.getElementById('destinationsGrid');
+
+                // City-specific images (US + India)
+                const cityImages = {
+                    // US Cities
+                    'New York': 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800&h=400&fit=crop&q=80',
+                    'Los Angeles': 'https://images.unsplash.com/photo-1580655653885-65763b2597d0?w=800&h=400&fit=crop&q=80',
+                    'Miami': 'https://images.unsplash.com/photo-1506966953602-c20cc11f75e3?w=800&h=400&fit=crop&q=80',
+                    'Chicago': 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=400&fit=crop&q=80',
+                    'San Francisco': 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&h=400&fit=crop&q=80',
+                    'Boston': 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=800&h=400&fit=crop&q=80',
+                    // Indian Cities
+                    'Mumbai': '/images/cars/mumbai_city_1769946173020.png',
+                    'Delhi': '/images/cars/delhi_city_1769946192364.png',
+                    'Bangalore': '/images/cars/bangalore_city_1769946213267.png',
+                    'Hyderabad': '/images/cars/hyderabad_city_1769946230631.png',
+                    'Chennai': '/images/cars/chennai_city_1769946247465.png',
+                    'Pune': 'https://images.unsplash.com/photo-1595658658481-d53d3f999875?w=800&h=400&fit=crop&q=80'
+                };
+
+                locations.slice(0, 6).forEach(location => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.style.cursor = 'pointer';
+                    const cityImage = cityImages[location.city] || 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=400&fit=crop&q=80';
+                    card.innerHTML = `
+                        <div class="card-image-container">
+                            <img src="${cityImage}" 
+                                 alt="${location.city}" class="card-image">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">${location.city}</h3>
+                            <p class="card-subtitle">${location.name}</p>
+                            <p style="color: var(--gray-600); margin-top: 0.5rem;">${location.address}</p>
+                        </div>
+                    `;
+                    card.addEventListener('click', () => {
+                        window.location.href = `/browse.html?location=${location.id}`;
+                    });
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Failed to load destinations:', error);
+            }
+        }
+
+        // Load featured cars
+        async function loadFeaturedCars() {
+            try {
+                const cars = await CarRental.apiRequest('/cars');
+                const grid = document.getElementById('featuredCarsGrid');
+
+                cars.slice(0, 6).forEach(car => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.style.cursor = 'pointer';
+                    card.innerHTML = `
+                        <div class="card-image-container">
+                            <img src="${car.image_url}" alt="${car.name}" class="card-image">
+                            <div class="card-badge">${car.car_type}</div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">${car.name}</h3>
+                            <p class="card-subtitle">${car.location_name}, ${car.city}</p>
+                            <div class="card-features">
+                                <span class="feature-tag">👥 ${car.seats} Seats</span>
+                                <span class="feature-tag">⚙️ ${car.transmission}</span>
+                                <span class="feature-tag">⛽ ${car.fuel_type}</span>
+                            </div>
+                            <div class="card-price">
+                                <div>
+                                    <div class="price">$${car.price_per_day}</div>
+                                    <div class="price-label">per day</div>
+                                </div>
+                                <button class="btn btn-primary">Book Now</button>
+                            </div>
+                        </div>
+                    `;
+                    card.addEventListener('click', (e) => {
+                        if (!e.target.classList.contains('btn')) {
+                            window.location.href = `/car-details.html?id=${car.id}`;
+                        }
+                    });
+                    const bookBtn = card.querySelector('.btn');
+                    bookBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        window.location.href = `/car-details.html?id=${car.id}`;
+                    });
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Failed to load cars:', error);
+            }
+        }
+
+        // Handle quick search
+        document.getElementById('quickSearchForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const location = document.getElementById('searchLocation').value;
+            const pickup = document.getElementById('searchPickup').value;
+            const returnDate = document.getElementById('searchReturn').value;
+
+            let url = '/browse.html?';
+            if (location) url += `location=${location}&`;
+            if (pickup) url += `pickup=${pickup}&`;
+            if (returnDate) url += `return=${returnDate}`;
+
+            window.location.href = url;
+        });
+
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('searchPickup').min = today;
+        document.getElementById('searchReturn').min = today;
+
+        // Initialize
+        loadLocations();
+        loadDestinations();
+        loadFeaturedCars();
+    </script>
+</body>
+
+</html>

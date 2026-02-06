@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Cars - DriveNow</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">DriveNow</a>
+            <ul class="nav-links" id="authLinks">
+                <li><a href="/browse.html">Browse Cars</a></li>
+                <li><a href="/login.html">Login</a></li>
+                <li><a href="/register.html" class="btn btn-primary">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div style="padding-top: 100px; min-height: 100vh;">
+        <div class="container-wide">
+            <div class="section-header">
+                <h1 class="section-title">Browse Our Fleet</h1>
+                <p class="section-subtitle">Find the perfect car for your journey</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 300px 1fr; gap: 2rem; margin-top: 2rem;">
+                <!-- Filter Sidebar -->
+                <aside class="filter-sidebar">
+                    <h3 style="margin-bottom: 1.5rem;">Filters</h3>
+
+                    <div class="filter-group">
+                        <label class="filter-title">Location</label>
+                        <select id="filterLocation" class="form-control">
+                            <option value="">All Locations</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-title">Car Type</label>
+                        <select id="filterType" class="form-control">
+                            <option value="">All Types</option>
+                            <option value="Sedan">Sedan</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Luxury Sedan">Luxury Sedan</option>
+                            <option value="Luxury SUV">Luxury SUV</option>
+                            <option value="Sports Car">Sports Car</option>
+                            <option value="Electric Sedan">Electric Sedan</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-title">Price Range (per day)</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="number" id="filterMinPrice" class="form-control" placeholder="Min" min="0">
+                            <input type="number" id="filterMaxPrice" class="form-control" placeholder="Max" min="0">
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-title">Pickup Date</label>
+                        <input type="date" id="filterPickupDate" class="form-control">
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-title">Return Date</label>
+                        <input type="date" id="filterReturnDate" class="form-control">
+                    </div>
+
+                    <button id="applyFilters" class="btn btn-primary" style="width: 100%;">Apply Filters</button>
+                    <button id="clearFilters" class="btn btn-ghost" style="width: 100%; margin-top: 0.5rem;">Clear
+                        All</button>
+                </aside>
+
+                <!-- Cars Grid -->
+                <main>
+                    <div id="resultsInfo" style="margin-bottom: 1.5rem; color: var(--gray-600); font-size: 1.125rem;">
+                        Loading cars...
+                    </div>
+                    <div class="grid grid-3" id="carsGrid">
+                        <!-- Cars will be loaded here -->
+                    </div>
+                    <div id="noCarsMessage" class="hidden"
+                        style="text-align: center; padding: 3rem; color: var(--gray-500);">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🚗</div>
+                        <h3>No cars found</h3>
+                        <p>Try adjusting your filters to see more results</p>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 DriveNow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/browse.js"></script>
+</body>
+
+</html>

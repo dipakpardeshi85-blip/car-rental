@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - DriveNow</title>
+    <meta name="description" content="Create your DriveNow account and start renting premium cars today.">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">DriveNow</a>
+            <ul class="nav-links">
+                <li><a href="/browse.html">Browse Cars</a></li>
+                <li><a href="/login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Registration Form -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>Create Account</h1>
+            <p class="auth-subtitle">Join DriveNow and start your journey</p>
+
+            <div id="errorMessage" class="alert alert-error" style="display: none;"></div>
+            <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" class="form-control" required
+                        placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-control" required
+                        placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" class="form-control"
+                        placeholder="Enter your phone number (optional)">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required
+                        placeholder="Create a password" minlength="6">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required
+                        placeholder="Confirm your password" minlength="6">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+
+            <p class="auth-footer">
+                Already have an account? <a href="/login.html">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/auth.js"></script>
+    <script>
+        // Handle registration form submission
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Clear previous messages
+            CarRental.hideAlert('errorMessage');
+            CarRental.hideAlert('successMessage');
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                CarRental.showAlert('errorMessage', 'Passwords do not match');
+                return;
+            }
+
+            // Validate password length
+            if (password.length < 6) {
+                CarRental.showAlert('errorMessage', 'Password must be at least 6 characters long');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        full_name: fullName,
+                        phone: phone || null
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    CarRental.showAlert('successMessage', 'Account created successfully! Redirecting to login...');
+                    setTimeout(() => {
+                        window.location.href = '/login.html';
+                    }, 1500);
+                } else {
+                    CarRental.showAlert('errorMessage', data.error || 'Registration failed');
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                CarRental.showAlert('errorMessage', 'An error occurred. Please try again.');
+            }
+        });
+    </script>
+</body>
+
+</html>

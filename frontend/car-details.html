@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details - DriveNow</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="logo">DriveNow</a>
+            <ul class="nav-links" id="authLinks">
+                <li><a href="/browse.html">Browse Cars</a></li>
+                <li><a href="/login.html">Login</a></li>
+                <li><a href="/register.html" class="btn btn-primary">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div style="padding-top: 100px; min-height: 100vh;">
+        <div class="container">
+            <div id="carDetails">
+                <!-- Car details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 DriveNow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        let currentCar = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const carId = params.get('id');
+
+            if (!carId) {
+                window.location.href = '/browse.html';
+                return;
+            }
+
+            await loadCarDetails(carId);
+        });
+
+        async function loadCarDetails(carId) {
+            try {
+                currentCar = await CarRental.apiRequest(`/cars/${carId}`);
+                displayCarDetails(currentCar);
+            } catch (error) {
+                console.error('Failed to load car:', error);
+                document.getElementById('carDetails').innerHTML = `
+                    <div class="alert alert-error">Failed to load car details</div>
+                `;
+            }
+        }
+
+        function displayCarDetails(car) {
+            const features = car.features ? car.features.split(',').map(f => f.trim()) : [];
+
+            document.getElementById('carDetails').innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem;">
+                    <div>
+                        <img src="${car.image_url}" alt="${car.name}" 
+                             style="width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-xl);"
+                             onerror="this.src='https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800'">
+                    </div>
+                    <div>
+                        <div style="display: inline-block; padding: 0.5rem 1rem; background: var(--gradient-primary); color: white; border-radius: var(--radius-md); margin-bottom: 1rem; font-weight: 600;">
+                            ${car.car_type}
+                        </div>
+                        <h1 style="margin-bottom: 0.5rem;">${car.name}</h1>
+                        <p style="color: var(--gray-600); font-size: 1.125rem; margin-bottom: 2rem;">
+                            📍 ${car.location_name}, ${car.city}
+                        </p>
+                        
+                        <div style="background: var(--gray-100); padding: 1.5rem; border-radius: var(--radius-lg); margin-bottom: 2rem;">
+                            <div class="price" style="font-size: 3rem; margin-bottom: 0.5rem;">$${car.price_per_day}</div>
+                            <div class="price-label" style="font-size: 1rem;">per day</div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                            <div style="background: white; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">👥</div>
+                                <div style="font-weight: 600;">${car.seats} Seats</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚙️</div>
+                                <div style="font-weight: 600;">${car.transmission}</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⛽</div>
+                                <div style="font-weight: 600;">${car.fuel_type}</div>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📅</div>
+                                <div style="font-weight: 600;">${car.year}</div>
+                            </div>
+                        </div>
+
+                        <button onclick="openBookingForm()" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1.125rem;">
+                            Book This Car
+                        </button>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); margin-bottom: 2rem;">
+                    <h2 style="margin-bottom: 1rem;">Description</h2>
+                    <p style="color: var(--gray-700); line-height: 1.8;">${car.description || 'No description available.'}</p>
+                </div>
+
+                ${features.length > 0 ? `
+                    <div style="background: white; padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+                        <h2 style="margin-bottom: 1rem;">Features</h2>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                            ${features.map(feature => `
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: var(--primary); font-size: 1.25rem;">✓</span>
+                                    <span>${feature}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+
+                <!-- Booking Modal -->
+                <div id="bookingModal" class="hidden" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 2rem;">
+                    <div style="background: white; border-radius: var(--radius-xl); padding: 2rem; max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h2>Book ${car.name}</h2>
+                            <button onclick="closeBookingForm()" style="background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--gray-500);">&times;</button>
+                        </div>
+
+                        <div id="bookingAlert"></div>
+
+                        <form id="bookingForm">
+                            <div class="form-group">
+                                <label>Pickup Date</label>
+                                <input type="date" id="pickupDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Return Date</label>
+                                <input type="date" id="returnDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Pickup Location</label>
+                                <select id="pickupLocation" class="form-control" required>
+                                    <option value="${car.location_id}">${car.location_name}, ${car.city}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Return Location</label>
+                                <select id="returnLocation" class="form-control" required>
+                                    <option value="${car.location_id}">${car.location_name}, ${car.city}</option>
+                                </select>
+                            </div>
+
+                            <div id="priceBreakdown" class="hidden" style="background: var(--gray-100); padding: 1rem; border-radius: var(--radius-md); margin: 1rem 0;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Days:</span>
+                                    <span id="totalDays">0</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Price per day:</span>
+                                    <span>$${car.price_per_day}</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.25rem; padding-top: 0.5rem; border-top: 2px solid var(--gray-300);">
+                                    <span>Total:</span>
+                                    <span id="totalPrice">$0</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Confirm Booking</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+
+            // Set minimum dates
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('pickupDate').min = today;
+            document.getElementById('returnDate').min = today;
+
+            // Setup booking form
+            setupBookingForm();
+        }
+
+        function openBookingForm() {
+            if (!CarRental.isLoggedIn()) {
+                CarRental.showAlert('Please login to book a car', 'info');
+                setTimeout(() => {
+                    window.location.href = '/login.html';
+                }, 1500);
+                return;
+            }
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function closeBookingForm() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        function setupBookingForm() {
+            const pickupDate = document.getElementById('pickupDate');
+            const returnDate = document.getElementById('returnDate');
+            const form = document.getElementById('bookingForm');
+
+            function updatePrice() {
+                const pickup = pickupDate.value;
+                const returnVal = returnDate.value;
+
+                if (pickup && returnVal) {
+                    const days = CarRental.calculateDays(pickup, returnVal);
+                    if (days > 0) {
+                        const total = days * currentCar.price_per_day;
+                        document.getElementById('totalDays').textContent = days;
+                        document.getElementById('totalPrice').textContent = CarRental.formatCurrency(total);
+                        document.getElementById('priceBreakdown').classList.remove('hidden');
+                    }
+                }
+            }
+
+            pickupDate.addEventListener('change', updatePrice);
+            returnDate.addEventListener('change', updatePrice);
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const pickup = pickupDate.value;
+                const returnVal = returnDate.value;
+                const pickupLoc = document.getElementById('pickupLocation').value;
+                const returnLoc = document.getElementById('returnLocation').value;
+
+                const days = CarRental.calculateDays(pickup, returnVal);
+                const total = days * currentCar.price_per_day;
+
+                try {
+                    await CarRental.apiRequest('/bookings', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            car_id: currentCar.id,
+                            pickup_date: pickup,
+                            return_date: returnVal,
+                            pickup_location_id: parseInt(pickupLoc),
+                            return_location_id: parseInt(returnLoc),
+                            total_price: total
+                        })
+                    });
+
+                    showBookingAlert('Booking confirmed! Redirecting to dashboard...', 'success');
+                    setTimeout(() => {
+                        window.location.href = '/dashboard.html';
+                    }, 2000);
+                } catch (error) {
+                    showBookingAlert(error.message, 'error');
+                }
+            });
+        }
+
+        function showBookingAlert(message, type) {
+            const alert = document.getElementById('bookingAlert');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+        }
+    </script>
+</body>
+
+</html>
