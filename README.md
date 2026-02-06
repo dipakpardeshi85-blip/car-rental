@@ -70,6 +70,27 @@ car-rental-website/
 └── README.md
 ```
 
+## Quick Start
+
+Use the automated build script to set up the project quickly:
+
+**Linux/Mac:**
+```bash
+chmod +x build.sh
+./build.sh
+```
+
+**Windows:**
+```bash
+build.bat
+```
+
+The build script will:
+- Install all Python dependencies
+- Initialize the database with sample data
+- Verify the installation
+- Display instructions to start the server
+
 ## Installation & Setup
 
 ### Prerequisites
